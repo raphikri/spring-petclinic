@@ -1,0 +1,13 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  call-reusable-workflow:
+    uses: ./.github/workflows/hello-template.yml
+    with:
+      username: 'Raph'

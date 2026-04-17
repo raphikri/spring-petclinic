@@ -1,0 +1,12 @@
+name: 'Hello Docker Action'
+description: 'Une action Docker locale qui affiche un message personnalisé dans les logs.'
+inputs:
+  message:
+    description: 'Message à afficher dans les logs'
+    required: true
+outputs:
+  output-message:
+    description: 'Message passé en entrée'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

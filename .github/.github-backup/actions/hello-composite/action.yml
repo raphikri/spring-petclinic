@@ -1,0 +1,27 @@
+name: 'Hello Composite Action'
+description: 'Une action composite qui salue l utilisateur, génère un nombre aléatoire et exécute un script goodbye.'
+inputs:
+  who-to-greet:
+    description: 'Nom de l utilisateur à saluer'
+    required: true
+outputs:
+  random-number:
+    description: 'Nombre aléatoire généré'
+runs:
+  using: 'composite'
+  steps:
+    - name: Saluer l'utilisateur
+      shell: bash
+      run: echo "Bonjour, ${{ inputs.who-to-greet }} !"
+
+    - name: Générer un nombre aléatoire
+      id: random
+      shell: bash
+      run: |
+        RANDOM_NUMBER=$((RANDOM % 100))
+        echo "Nombre aléatoire: $RANDOM_NUMBER"
+        echo "random-number=$RANDOM_NUMBER" >> $GITHUB_OUTPUT
+
+    - name: Exécuter le script goodbye
+      shell: bash
+      run: ./.github/actions/hello-composite/goodbye.sh
